@@ -52,11 +52,6 @@ def callback():
 def handle_message(event):
     message = text = event.message.text
     userid = event.source.user_id
-    profile = line_bot_api.get_profile(userid)
-    print(profile.display_name)
-    print(profile.user_id)
-    print(profile.picture_url)
-    print(profile.status_message)
     if re.match('設定到站提醒', message):
         image_carousel_template_message = TemplateSendMessage(
             alt_text='開始到站提醒',  

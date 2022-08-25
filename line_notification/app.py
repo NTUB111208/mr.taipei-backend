@@ -51,6 +51,35 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text = event.message.text
+    userid = event.source.user_id
+    profile = line_bot_api.get_profile(userid)
+    print(profile.display_name)
+    print(profile.user_id)
+    print(profile.picture_url)
+    print(profile.status_message)
+    if re.match('設定到站提醒', message):
+        image_carousel_template_message = TemplateSendMessage(
+            alt_text='開始到站提醒',  
+            template=ImageCarouselTemplate(
+                columns=[
+                     ImageCarouselColumn(
+                         image_url='https://raw.githubusercontent.com/KoHsuanNa/LineTest/main/resource/IMG_5568.jpg',
+                         action=PostbackTemplateAction(
+                             label='設定完成',
+                             text='收到',
+                             data='action=收到'
+                         ))]))
+
+        line_bot_api.reply_message(
+            event.reply_token, image_carousel_template_message)
+
+    elif re.match('收到', message):
+        result = set_record()
+        time.sleep(result-120)
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage('已抵達目的地'))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 
 
 # 主程式

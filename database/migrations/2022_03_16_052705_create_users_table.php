@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id('user_id');
             $table->string('user_name',20);
             $table->string('user_number',50);
-            $table->string('user_common',50);
+            $table->string('user_common',50,null);
             $table->timestamps();
         });
     }

@@ -9,9 +9,9 @@ import time
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('OL6gBrOu9QhnSsr0uQSDnxaeDlSNkx7XIIC2wdNrZyXpMkntulEjb57BOnFcWUZMddRu5T4YvdHu6j349dA/FlukLZD9c0Sem16hahns8Wl5irTlPEgOH9yuEMNGGeZUY32CCyGBr+IKjnYAukzYXgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('8b6970c622e7a38ee4621f1e64f6a356')
+handler = WebhookHandler('')
 
 
 # 監聽所有來自 /callback 的 Post Request

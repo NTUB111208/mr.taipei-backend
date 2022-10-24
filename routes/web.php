@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('/api/auth/login', [App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/api/auth/status', [App\Http\Controllers\AuthController::class, 'status']);
+
+Route::get('/api/lostItems', [App\Http\Controllers\LostItemController::class, 'list']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/api/lostItem', [App\Http\Controllers\LostItemController::class, 'create']);
+    Route::get('/api/llostItem/{lostItemID}', [App\Http\Controllers\LostItemController::class, 'read']);
+    Route::put('/api/lostItem/{lostItemID}', [App\Http\Controllers\LostItemController::class, 'update']);
+    Route::delete('/api/lostItem/{lostItemID}', [App\Http\Controllers\LostItemController::class, 'delete']);
 });

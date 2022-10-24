@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +14,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
-
-// Route::group(['middleware'=>['auth:sanctum']], function () { 
- 
-
-
-// });
-Route::get("/ping", function(){return "pong";});
-
-Route::get("/user",[UserController::class,'index']);
-Route::post("/user",[UserController::class,'store']);
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

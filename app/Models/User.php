@@ -24,6 +24,9 @@ class User extends Authenticatable
         'user_avatar',
         'user_oauth_id',
         'user_oauth_provider',
+        'user_is_admin',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -32,6 +35,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'user_is_admin' => 'boolean',
         'created_at' => 'datetime',
         'udpated_at' => 'datetime',
     ];

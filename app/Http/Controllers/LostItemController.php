@@ -20,8 +20,14 @@ class LostItemController extends Controller
 
     public function list()
     {
+        $items = [];
+        if (Auth::check() && Auth::user()->user_is_admin) {
+            $items = LostItem::all();
+        } else {
+            $items =  LostItem::where('lost_item_status', '==', '已通報')->get();
+        }
         return response()->json(
-            ['items' => LostItem::all()]
+            ['items' => $items]
         );
     }
 
@@ -36,6 +42,7 @@ class LostItemController extends Controller
             'lost_item_description' => $request->input('lost_item_description'),
             'lost_item_location' => $request->input('lost_item_location'),
             'lost_item_color' => $request->input('lost_item_color'),
+            'lost_item_status' => "已通報",
             'created_by' => auth()->user()->user_id,
             'updated_by' => auth()->user()->user_id,
 
